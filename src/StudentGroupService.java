@@ -9,7 +9,9 @@ public class StudentGroupService {
         Iterator<Student> iterator = studentGroup.iterator();
         while (iterator.hasNext()) {
             Student student = iterator.next();
-            if (student.getFirstName().equals(firstName) && student.getLastName().equals(lastName) && student.getMiddleName().equals(middleName)) {
+            if (student.getFirstName().equals(firstName)
+                    && student.getLastName().equals(lastName)
+                    && student.getMiddleName().equals(middleName)) {
                 iterator.remove();
             }
         }
@@ -21,9 +23,13 @@ public class StudentGroupService {
         return studentList;
     }
 
-    public List<Student> getSortedStudentByID() {
+    public List<Student> getSortedStudentByFIO() {
         List<Student> studentList = new ArrayList<>(studentGroup.getStudentList());
-        studentList.sort(new StudentComparator());
+        studentList.sort(new UserComparator<Student>());
         return studentList;
+    }
+
+    public void createStudent(String firstName, String lastName, String middleName) {
+        studentGroup.createStudent(firstName,lastName, middleName);
     }
 }
